@@ -1,10 +1,10 @@
-interface BalloonProps {
+interface BalloonSpriteProps {
   x: number
   y: number
   radius: number
 }
 
-function Balloon({ x, y, radius }: BalloonProps) {
+function BalloonSprite({ x, y, radius }: BalloonSpriteProps) {
   return (
     <div
       className="balloon"
@@ -18,4 +18,4 @@ function Balloon({ x, y, radius }: BalloonProps) {
   )
 }
 
-export default Balloon
+export default BalloonSprite

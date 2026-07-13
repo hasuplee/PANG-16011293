@@ -8,25 +8,22 @@ import {
 } from '../game/constants'
 import GameViewport from '../game/GameViewport'
 import Player from '../game/Player'
-import Balloon from '../game/Balloon'
-import Wire from '../game/Wire'
+import BalloonSprite from '../game/BalloonSprite'
+import Bullet from '../game/Bullet'
 import { usePlayerMovement } from '../game/usePlayerMovement'
-import { useBalloonPhysics } from '../game/useBalloonPhysics'
-import { useWire } from '../game/useWire'
+import { useGameplay } from '../game/useGameplay'
+import { createBalloon, radiusOf } from '../game/balloon'
 
 interface GameScreenProps {
   onBackToMain: () => void
 }
 
+const INITIAL_BALLOONS = [
+  createBalloon('large', GAME_WIDTH / 2, BALLOON_LARGE_RADIUS, BALLOON_INITIAL_SPEED_X, 0),
+]
+
 function GameScreen({ onBackToMain }: GameScreenProps) {
   const playerX = usePlayerMovement(GAME_WIDTH, PLAYER_WIDTH, PLAYER_SPEED)
-  const balloon = useBalloonPhysics({
-    x: GAME_WIDTH / 2,
-    y: BALLOON_LARGE_RADIUS,
-    vx: BALLOON_INITIAL_SPEED_X,
-    vy: 0,
-    radius: BALLOON_LARGE_RADIUS,
-  })
 
   const playerXRef = useRef(playerX)
   useEffect(() => {
@@ -34,14 +31,16 @@ function GameScreen({ onBackToMain }: GameScreenProps) {
   }, [playerX])
   const getPlayerCenterX = useCallback(() => playerXRef.current + PLAYER_WIDTH / 2, [])
 
-  const wireX = useWire(getPlayerCenterX)
+  const { balloons, bullet } = useGameplay(INITIAL_BALLOONS, getPlayerCenterX)
 
   return (
     <div className="screen">
       <GameViewport>
         <Player x={playerX} />
-        <Balloon x={balloon.x} y={balloon.y} radius={balloon.radius} />
-        {wireX !== null && <Wire x={wireX} />}
+        {balloons.map((balloon) => (
+          <BalloonSprite key={balloon.id} x={balloon.x} y={balloon.y} radius={radiusOf(balloon.tier)} />
+        ))}
+        {bullet && <Bullet x={bullet.x} y={bullet.y} />}
       </GameViewport>
       <div className="menu">
         <button onClick={onBackToMain}>메인으로 돌아가기</button>
