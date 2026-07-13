@@ -79,3 +79,19 @@
   border: 2px solid #1c2b4a;
   border-radius: 6px;
 }
+
+.balloon {
+  position: absolute;
+  background-color: #4fc3f7;
+  border: 2px solid #1c2b4a;
+  border-radius: 50%;
+}
+
+.wire {
+  position: absolute;
+  top: 0;
+  bottom: 8px;
+  width: 3px;
+  background-color: #1c2b4a;
+  transform: translateX(-50%);
+}
