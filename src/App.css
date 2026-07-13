@@ -72,12 +72,21 @@
   background-color: #3b4d2a;
 }
 
+.hud {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
 .player {
   position: absolute;
   bottom: 8px;
   background-color: #ff5a3c;
   border: 2px solid #1c2b4a;
   border-radius: 6px;
+}
+
+.player.invulnerable {
+  opacity: 0.5;
 }
 
 .balloon {

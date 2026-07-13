@@ -3,9 +3,10 @@ import MainScreen from './screens/MainScreen'
 import MissionSelectScreen from './screens/MissionSelectScreen'
 import GameScreen from './screens/GameScreen'
 import ExitedScreen from './screens/ExitedScreen'
+import GameOverScreen from './screens/GameOverScreen'
 import './App.css'
 
-type Screen = 'main' | 'missionSelect' | 'game' | 'exited'
+type Screen = 'main' | 'missionSelect' | 'game' | 'exited' | 'gameOver'
 
 function App() {
   const [screen, setScreen] = useState<Screen>('main')
@@ -27,9 +28,16 @@ function App() {
         />
       )
     case 'game':
-      return <GameScreen onBackToMain={() => setScreen('main')} />
+      return (
+        <GameScreen
+          onBackToMain={() => setScreen('main')}
+          onGameOver={() => setScreen('gameOver')}
+        />
+      )
     case 'exited':
       return <ExitedScreen onBackToMain={() => setScreen('main')} />
+    case 'gameOver':
+      return <GameOverScreen onBackToMain={() => setScreen('main')} />
   }
 }
 

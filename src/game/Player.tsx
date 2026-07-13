@@ -2,12 +2,13 @@ import { PLAYER_HEIGHT, PLAYER_WIDTH } from './constants'
 
 interface PlayerProps {
   x: number
+  invulnerable?: boolean
 }
 
-function Player({ x }: PlayerProps) {
+function Player({ x, invulnerable }: PlayerProps) {
   return (
     <div
-      className="player"
+      className={invulnerable ? 'player invulnerable' : 'player'}
       style={{
         left: x,
         width: PLAYER_WIDTH,

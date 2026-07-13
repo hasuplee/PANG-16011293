@@ -18,3 +18,6 @@ export const GRAVITY = 700 // px per second^2
 export const FIRE_KEY = ' '
 export const BULLET_SPEED = 500 // px per second
 export const BULLET_RADIUS = 5
+
+export const INITIAL_LIVES = 5
+export const INVULNERABLE_DURATION_MS = 1000

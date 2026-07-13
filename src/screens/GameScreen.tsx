@@ -12,17 +12,19 @@ import BalloonSprite from '../game/BalloonSprite'
 import Bullet from '../game/Bullet'
 import { usePlayerMovement } from '../game/usePlayerMovement'
 import { useGameplay } from '../game/useGameplay'
+import { usePlayerLife } from '../game/usePlayerLife'
 import { createBalloon, radiusOf } from '../game/balloon'
 
 interface GameScreenProps {
   onBackToMain: () => void
+  onGameOver: () => void
 }
 
 const INITIAL_BALLOONS = [
   createBalloon('large', GAME_WIDTH / 2, BALLOON_LARGE_RADIUS, BALLOON_INITIAL_SPEED_X, 0),
 ]
 
-function GameScreen({ onBackToMain }: GameScreenProps) {
+function GameScreen({ onBackToMain, onGameOver }: GameScreenProps) {
   const playerX = usePlayerMovement(GAME_WIDTH, PLAYER_WIDTH, PLAYER_SPEED)
 
   const playerXRef = useRef(playerX)
@@ -32,11 +34,17 @@ function GameScreen({ onBackToMain }: GameScreenProps) {
   const getPlayerCenterX = useCallback(() => playerXRef.current + PLAYER_WIDTH / 2, [])
 
   const { balloons, bullet } = useGameplay(INITIAL_BALLOONS, getPlayerCenterX)
+  const { lives, invulnerable } = usePlayerLife(playerX, balloons)
+
+  useEffect(() => {
+    if (lives <= 0) onGameOver()
+  }, [lives, onGameOver])
 
   return (
     <div className="screen">
+      <div className="hud">라이프: {lives}</div>
       <GameViewport>
-        <Player x={playerX} />
+        <Player x={playerX} invulnerable={invulnerable} />
         {balloons.map((balloon) => (
           <BalloonSprite key={balloon.id} x={balloon.x} y={balloon.y} radius={radiusOf(balloon.tier)} />
         ))}
