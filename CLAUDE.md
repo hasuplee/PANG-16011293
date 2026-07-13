@@ -20,6 +20,12 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 현재 저장소에는 테스트 프레임워크가 설치되어 있지 않다. 테스트를 추가할 경우 `package.json`에 `test` 스크립트와 관련 의존성(예: Vitest)을 먼저 구성해야 한다.
 
+## 기획/설계 문서
+
+- 전체 배경/게임 룰: [docs/PRD.md](docs/PRD.md), [docs/FEATURES/](docs/FEATURES/)
+- Phase별 개발 계획(각 Phase는 실행 가능한 SW 단위): [docs/PLAN.md](docs/PLAN.md)
+- Phase별 상세 설계 문서: `docs/design/phase*.md` (예: [docs/design/phase1.md](docs/design/phase1.md)) — 새 Phase가 추가될 때마다 `docs/design/phase{N}.md` 형식으로 해당 Phase의 설계 내용을 기록한다.
+
 ## 아키텍처
 
 - `index.html`이 진입점이며 `src/main.tsx`를 모듈로 로드한다.

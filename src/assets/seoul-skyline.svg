@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 320" preserveAspectRatio="xMidYMax slice">
+  <!-- 남산 -->
+  <path
+    d="M0,320 L0,260 Q220,150 420,230 Q560,110 620,60 Q680,110 800,220 Q1000,140 1200,250 L1200,320 Z"
+    fill="#5c9464"
+  />
+  <path
+    d="M420,230 Q560,110 620,60 Q680,110 800,220 Q700,190 620,150 Q540,190 420,230 Z"
+    fill="#4a7d54"
+  />
+
+  <!-- N서울타워 (남산타워) -->
+  <g fill="#33415c">
+    <rect x="611" y="15" width="18" height="60" />
+    <ellipse cx="620" cy="70" rx="40" ry="22" />
+    <rect x="616" y="0" width="8" height="18" />
+    <circle cx="620" cy="-4" r="7" />
+  </g>
+
+  <!-- 도시 건물 -->
+  <g fill="#586a86">
+    <rect x="0" y="255" width="90" height="65" />
+    <rect x="100" y="230" width="70" height="90" />
+    <rect x="180" y="265" width="60" height="55" />
+    <rect x="900" y="240" width="65" height="80" />
+    <rect x="975" y="270" width="75" height="50" />
+    <rect x="1060" y="215" width="60" height="105" />
+    <rect x="1130" y="255" width="70" height="65" />
+  </g>
+</svg>
