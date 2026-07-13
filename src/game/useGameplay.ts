@@ -21,13 +21,21 @@ export interface Bullet {
 
 const BULLET_START_Y = GAME_HEIGHT - GROUND_HEIGHT - PLAYER_HEIGHT
 
-export function useGameplay(initialBalloons: Balloon[], getPlayerCenterX: () => number) {
+export function useGameplay(
+  initialBalloons: Balloon[],
+  getPlayerCenterX: () => number,
+  onHit?: () => void,
+) {
   const [balloons, setBalloons] = useState<Balloon[]>(initialBalloons)
   const [bullet, setBullet] = useState<Bullet | null>(null)
 
   const balloonsRef = useRef(balloons)
   const bulletRef = useRef(bullet)
   const fireRequestedRef = useRef(false)
+  const onHitRef = useRef(onHit)
+  useEffect(() => {
+    onHitRef.current = onHit
+  }, [onHit])
 
   useEffect(() => {
     function handleKeyDown(event: KeyboardEvent) {
@@ -69,6 +77,7 @@ export function useGameplay(initialBalloons: Balloon[], getPlayerCenterX: () => 
           if (hitIndex !== -1) {
             nextBalloons.splice(hitIndex, 1, ...splitBalloon(nextBalloons[hitIndex]))
             nextBullet = null
+            onHitRef.current?.()
           } else if (toY <= 0) {
             nextBullet = null
           } else {

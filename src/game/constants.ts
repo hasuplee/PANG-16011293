@@ -21,3 +21,5 @@ export const BULLET_RADIUS = 5
 
 export const INITIAL_LIVES = 5
 export const INVULNERABLE_DURATION_MS = 1000
+
+export const SCORE_PER_HIT = 100
